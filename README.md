@@ -11,10 +11,19 @@
 ## Docker
 
 ```bash
+
 # Запуск colima
 colima start --vm-type=vz --vz-rosetta --cpu 4 --memory 8 --disk 60
+
 # Сборка docker image
 docker buildx build -t rust-dev --load .
+
 # Запуск docker image
 docker run -it --rm -v $(pwd):/app -w /app rust-dev bash
+
+# Запуск miri
+cargo +nightly miri run -p broken-app --bin broken-demo
+
+# Запуск valgrind
+valgrind --leak-check=full ./target/debug/broken-demo
 ```
