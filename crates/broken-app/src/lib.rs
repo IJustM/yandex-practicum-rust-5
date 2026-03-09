@@ -1,3 +1,5 @@
+use std::slice::from_raw_parts_mut;
+
 pub mod algo;
 pub mod concurrency;
 
@@ -31,7 +33,7 @@ pub fn leak_buffer(input: &[u8]) -> usize {
                 count += 1;
             }
         }
-        // утечка: не вызываем Box::from_raw(raw);
+        let _ = Box::from_raw(from_raw_parts_mut(raw, len));
     }
     count
 }
@@ -60,8 +62,9 @@ pub unsafe fn use_after_free() -> i32 {
     let b = Box::new(42_i32);
     let raw = Box::into_raw(b);
     unsafe {
-        let val = *raw;
+        let val_first = *raw;
+        let val_second = *raw;
         drop(Box::from_raw(raw));
-        val + *raw
+        val_first + val_second
     }
 }

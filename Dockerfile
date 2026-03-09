@@ -2,12 +2,15 @@
 FROM rust:latest
 
 # miri
-RUN rustup toolchain install nightly \
-    && rustup component add miri --toolchain nightly \
-    && rustup component add rust-src --toolchain nightly
+RUN rustup toolchain install nightly && \
+    rustup component add miri --toolchain nightly && \
+    rustup component add rust-src --toolchain nightly
 
 # valgrind
-RUN apt-get update && apt-get install -y valgrind && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    apt-get install -y valgrind clang && \
+    rm -rf /var/lib/apt/lists/* && \
+    cargo install cargo-valgrind
 
 # Указываем рабочую директорию
 WORKDIR /app

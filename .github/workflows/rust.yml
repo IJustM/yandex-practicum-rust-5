@@ -10,15 +10,27 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build:
+  fmt:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Run fmt
+      - name: fmt
         run: cargo fmt --all -- --check
-      - name: Run clippy
+  clippy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: clippy
         run: cargo clippy --all --all-targets --locked
-      - name: Run tests
-        run: cargo test --verbose
-      - name: Build
-        run: cargo build --verbose
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: test
+        run: cargo test -p broken-app
+  asan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: asan
+        run: RUSTFLAGS="-Zsanitizer=address" cargo +nightly test -p broken-app
