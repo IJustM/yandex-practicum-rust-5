@@ -35,14 +35,14 @@ docker buildx build -t rust-dev --no-cache --load .
 docker run -it --rm --privileged -v $(pwd):/app -w /app rust-dev bash
 
 # Запуск miri
-cargo +nightly miri test -p broken-app
+cargo +nightly miri test -p broken-app --test integration
 
 # Запуск valgrind
-cargo valgrind test -p broken-app
+cargo valgrind test -p broken-app --test integration
 
 # ASan
-RUSTFLAGS="-Zsanitizer=address" cargo +nightly test -p broken-app -Zbuild-std --target aarch64-unknown-linux-gnu
+RUSTFLAGS="-Zsanitizer=address" cargo +nightly test -p broken-app --test integration -Zbuild-std --target aarch64-unknown-linux-gnu
 
 # TSan
-RUSTFLAGS="-Zsanitizer=thread" cargo +nightly test -p broken-app -Zbuild-std --target aarch64-unknown-linux-gnu
+RUSTFLAGS="-Zsanitizer=thread" cargo +nightly test -p broken-app --test integration -Zbuild-std --target aarch64-unknown-linux-gnu
 ```
