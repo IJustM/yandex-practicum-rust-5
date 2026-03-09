@@ -64,4 +64,8 @@ RUSTFLAGS="-Zsanitizer=thread" cargo +nightly test -p broken-app --test integrat
 
 ![bench_1](./artifacts/bench_1.png)
 
-Наблюдаю, что во flamegraph в лидеры вышла функция normlize
+Наблюдаю, что во flamegraph в лидеры вышла функция slow_dedup и normlize. Оптимизирую slow_dedup
+
+![flamegraph_2](./artifacts/flamegraph_2.svg)
+
+![bench_2](./artifacts/bench_2.png)

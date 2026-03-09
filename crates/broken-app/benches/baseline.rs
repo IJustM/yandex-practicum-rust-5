@@ -30,5 +30,9 @@ fn main() {
         time_it("slow_dedup", || {
             let _ = algo::slow_dedup(&dedup_data);
         });
+
+        time_it("my_fast_dedup", || {
+            let _ = algo::my_fast_dedup(&dedup_data);
+        });
     }
 }

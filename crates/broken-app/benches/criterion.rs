@@ -16,7 +16,7 @@ fn bench_dedup(c: &mut Criterion) {
         b.iter_batched(
             || data.clone(),
             |v| {
-                let _ = algo::slow_dedup(&v);
+                let _ = algo::my_fast_dedup(&v);
             },
             BatchSize::SmallInput,
         )

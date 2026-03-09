@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 /// Намеренно низкопроизводительная реализация.
 pub fn slow_dedup(values: &[u64]) -> Vec<u64> {
     let mut out = Vec::new();
@@ -18,6 +20,18 @@ pub fn slow_dedup(values: &[u64]) -> Vec<u64> {
     out
 }
 
+/// Более быстра реализация slow_dedup
+pub fn my_fast_dedup(values: &[u64]) -> Vec<u64> {
+    let mut out: Vec<u64> = Vec::new();
+    let mut seen = HashSet::new();
+    for v in values {
+        if seen.insert(v) {
+            out.push(*v);
+        }
+    }
+    out
+}
+
 /// Классическая экспоненциальная реализация без мемоизации — будет медленной на больших n.
 pub fn slow_fib(n: u64) -> u64 {
     match n {
@@ -27,7 +41,7 @@ pub fn slow_fib(n: u64) -> u64 {
     }
 }
 
-/// Более быстра реализация
+/// Более быстра реализация slow_fib
 pub fn my_fast_fib(n: u64) -> u64 {
     if n == 0 {
         return 0;
