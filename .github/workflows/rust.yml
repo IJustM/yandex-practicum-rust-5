@@ -33,4 +33,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: asan
-        run: RUSTFLAGS="-Zsanitizer=address" cargo +nightly test -p broken-app
+        run: RUSTFLAGS="-Zsanitizer=address" cargo +nightly test -p broken-app -Zbuild-std
