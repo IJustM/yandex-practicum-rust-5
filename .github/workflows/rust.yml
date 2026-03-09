@@ -75,8 +75,6 @@ jobs:
       - name: rust
         uses: dtolnay/rust-toolchain@stable
       - name: install valgrind
-        run: sudo apt-get update && sudo apt-get install -y valgrind
-      - name: build
-        run: cargo build -p broken-app
+        run: sudo apt-get update && sudo apt-get install -y valgrind && cargo install cargo-valgrind
       - name: run 
-        run:  valgrind --leak-check=full --error-exitcode=1 ./target/debug/broken-app
+        run: cargo valgrind test -p broken-app --test integration
