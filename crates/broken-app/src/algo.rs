@@ -26,3 +26,18 @@ pub fn slow_fib(n: u64) -> u64 {
         _ => slow_fib(n - 1) + slow_fib(n - 2),
     }
 }
+
+/// Более быстра реализация
+pub fn my_fast_fib(n: u64) -> u64 {
+    if n == 0 {
+        return 0;
+    }
+    let mut a = 0;
+    let mut b = 1;
+    for _ in 1..n {
+        let next = a + b;
+        a = b;
+        b = next;
+    }
+    b
+}

@@ -46,3 +46,22 @@ RUSTFLAGS="-Zsanitizer=address" cargo +nightly test -p broken-app --test integra
 # TSan
 RUSTFLAGS="-Zsanitizer=thread" cargo +nightly test -p broken-app --test integration -Zbuild-std --target aarch64-unknown-linux-gnu
 ```
+
+## История оптимизаций
+
+Оптимизация измерялась следующими инструментами:
+
+- Запуск `CARGO_PROFILE_RELEASE_DEBUG=true cargo flamegraph -p broken-app --bin broken-demo` с циклом 0..1000
+- Запуск `cargo bench -p broken-app`
+
+![flamegraph_0](./artifacts/flamegraph_0.svg)
+
+![bench_0](./artifacts/bench_0.png)
+
+Проблема в fib функции, поэтому написал новую функцию my_fast_fib. Повторный запуск bench и flamegraph
+
+![flamegraph_1](./artifacts/flamegraph_1.svg)
+
+![bench_1](./artifacts/bench_1.png)
+
+Наблюдаю, что во flamegraph в лидеры вышла функция normlize

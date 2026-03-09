@@ -23,6 +23,10 @@ fn main() {
             let _ = algo::slow_fib(fib_n);
         });
 
+        time_it("my_fast_fib", || {
+            let _ = algo::my_fast_fib(fib_n);
+        });
+
         time_it("slow_dedup", || {
             let _ = algo::slow_dedup(&dedup_data);
         });

@@ -11,3 +11,7 @@ criterion.workspace = true
 [[bench]]
 name = "baseline"
 harness = false
+
+[[bench]]
+name = "criterion"
+harness = false
