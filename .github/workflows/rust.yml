@@ -28,7 +28,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: test
         run: cargo test -p broken-app
-  asan:
+  asan and tsan:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -39,4 +39,8 @@ jobs:
       - name: asan
         env:
           RUSTFLAGS: "-Zsanitizer=address"
+        run: cargo test -p broken-app -Zbuild-std --target x86_64-unknown-linux-gnu
+      - name: tsan
+        env:
+          RUSTFLAGS: "-Zsanitizer=thread"
         run: cargo test -p broken-app -Zbuild-std --target x86_64-unknown-linux-gnu
