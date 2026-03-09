@@ -76,5 +76,7 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
       - name: install valgrind
         run: sudo apt-get update && sudo apt-get install -y valgrind && cargo install cargo-valgrind
-      - name: run 
+      - name: run
+        env:
+          VALGRIND_OPTS: "--leak-check=full --show-leak-kinds=definite"
         run: cargo valgrind test -p broken-app --test integration

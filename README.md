@@ -38,7 +38,7 @@ docker run -it --rm --privileged -v $(pwd):/app -w /app rust-dev bash
 cargo +nightly miri test -p broken-app --test integration
 
 # Запуск valgrind
-cargo valgrind test -p broken-app --test integration
+VALGRIND_OPTS="--leak-check=full --show-leak-kinds=definite" cargo valgrind test -p broken-app --test integration
 
 # ASan
 RUSTFLAGS="-Zsanitizer=address" cargo +nightly test -p broken-app --test integration -Zbuild-std --target aarch64-unknown-linux-gnu
