@@ -28,7 +28,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: test
         run: cargo test -p broken-app
-  asan and tsan:
+  sanitizers:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
