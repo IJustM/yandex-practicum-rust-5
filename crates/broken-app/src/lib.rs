@@ -19,6 +19,11 @@ pub fn sum_even(values: &[i64]) -> i64 {
     acc
 }
 
+// Быстрая реализация sum_even
+pub fn my_fast_sum_even(values: &[i64]) -> i64 {
+    values.iter().filter(|&v| v % 2 == 0).sum()
+}
+
 /// Подсчёт ненулевых байтов. Буфер намеренно не освобождается,
 /// что приведёт к утечке памяти (Valgrind это покажет).
 pub fn leak_buffer(input: &[u8]) -> usize {

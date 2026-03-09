@@ -49,6 +49,8 @@ RUSTFLAGS="-Zsanitizer=thread" cargo +nightly test -p broken-app --test integrat
 
 ## История оптимизаций
 
+### Первый запуск
+
 Оптимизация измерялась следующими инструментами:
 
 - Запуск `CARGO_PROFILE_RELEASE_DEBUG=true cargo flamegraph -p broken-app --bin broken-demo` с циклом 0..1000
@@ -58,14 +60,24 @@ RUSTFLAGS="-Zsanitizer=thread" cargo +nightly test -p broken-app --test integrat
 
 ![bench_0](./artifacts/bench_0.png)
 
+### Итерация 1
+
 Проблема в fib функции, поэтому написал новую функцию my_fast_fib. Повторный запуск bench и flamegraph
 
 ![flamegraph_1](./artifacts/flamegraph_1.svg)
 
 ![bench_1](./artifacts/bench_1.png)
 
-Наблюдаю, что во flamegraph в лидеры вышла функция slow_dedup и normlize. Оптимизирую slow_dedup
+### Итерация 2
+
+Наблюдаю, что во flamegraph в лидеры вышла функция slow_dedup и normalize. Оптимизирую slow_dedup
 
 ![flamegraph_2](./artifacts/flamegraph_2.svg)
 
 ![bench_2](./artifacts/bench_2.png)
+
+### Итерация 3
+
+Оптимизация функции из бенчмака sum_even. Переписана на my_fast_sum_even
+
+![bench_3](./artifacts/bench_3.png)
