@@ -2,6 +2,8 @@
 
 Егоров Дмитрий
 
+Все санитайзеры и линтеры запускаются на github actions, т.к. с локальным запуском на macbook m возникают трудности
+
 ## Настройка pre-commit
 
 Включение pre-commit `pre-commit install`
@@ -19,6 +21,8 @@ cargo test -p broken-app
 ```
 
 ## Docker
+
+Для локальный запусков
 
 ```bash
 # Запуск colima

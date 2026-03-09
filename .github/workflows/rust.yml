@@ -32,7 +32,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: prepare
-        run: rustup component add rust-src --toolchain nightly-x86_64-unknown-linux-gnu
+      - name: rust nightly
+        uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: rust-src
       - name: asan
-        run: RUSTFLAGS="-Zsanitizer=address" cargo +nightly test -p broken-app -Zbuild-std
+        env:
+          RUSTFLAGS: "-Zsanitizer=address"
+        run: cargo test -p broken-app -Zbuild-std --target x86_64-unknown-linux-gnu
