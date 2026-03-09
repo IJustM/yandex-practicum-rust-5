@@ -39,7 +39,7 @@ jobs:
       - name: asan
         env:
           RUSTFLAGS: "-Zsanitizer=address"
-        run: cargo test -p broken-app --test integration -Zbuild-std --target aarch64-unknown-linux-gnu
+        run: cargo test -p broken-app --test integration -Zbuild-std --target x86_64-unknown-linux-gnu
   tsan:
     runs-on: ubuntu-latest
     steps:
@@ -51,4 +51,4 @@ jobs:
       - name: tsan
         env:
           RUSTFLAGS: "-Zsanitizer=thread"
-        run: cargo test -p broken-app --test integration -Zbuild-std --target aarch64-unknown-linux-gnu
+        run: cargo test -p broken-app --test integration -Zbuild-std --target x86_64-unknown-linux-gnu
