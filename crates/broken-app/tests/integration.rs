@@ -1,4 +1,4 @@
-use broken_app::{algo, leak_buffer, normalize, sum_even, use_after_free};
+use broken_app::{algo, concurrency, leak_buffer, normalize, sum_even, use_after_free};
 
 #[test]
 fn sums_even_numbers() {
@@ -26,7 +26,7 @@ fn fib_small_numbers() {
 
 #[test]
 fn normalize_simple() {
-    assert_eq!(normalize(" Hello World "), "helloworld");
+    assert_eq!(normalize(" Hello World  "), "helloworld");
 }
 
 #[test]
@@ -40,4 +40,10 @@ fn averages_only_positive() {
 fn after_free() {
     let after_free = unsafe { use_after_free() };
     assert_eq!(after_free, 84);
+}
+
+#[test]
+fn race_increment() {
+    let total = concurrency::race_increment(1_000, 4);
+    assert_eq!(total, 4_000);
 }
