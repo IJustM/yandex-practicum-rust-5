@@ -14,13 +14,13 @@ fn counts_non_zero_bytes() {
 
 #[test]
 fn dedup_preserves_uniques() {
-    let uniq = algo::slow_dedup(&[5, 5, 1, 2, 2, 3]);
+    let uniq = algo::dedup(&[5, 5, 1, 2, 2, 3]);
     assert_eq!(uniq, vec![1, 2, 3, 5]);
 }
 
 #[test]
 fn fib_small_numbers() {
-    assert_eq!(algo::slow_fib(10), 55);
+    assert_eq!(algo::fib(10), 55);
 }
 
 #[test]

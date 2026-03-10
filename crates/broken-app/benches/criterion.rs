@@ -1,13 +1,13 @@
-use broken_app::{algo, my_fast_sum_even};
+use broken_app::{algo, sum_even};
 use criterion::{BatchSize, Criterion, criterion_group, criterion_main};
 
 fn bench_sum_even(c: &mut Criterion) {
     let data: Vec<i64> = (0..50_000).collect();
-    c.bench_function("sum_even_broken", |b| b.iter(|| my_fast_sum_even(&data)));
+    c.bench_function("sum_even_broken", |b| b.iter(|| sum_even(&data)));
 }
 
 fn bench_fib(c: &mut Criterion) {
-    c.bench_function("slow_fib_broken", |b| b.iter(|| algo::my_fast_fib(32)));
+    c.bench_function("slow_fib_broken", |b| b.iter(|| algo::fib(32)));
 }
 
 fn bench_dedup(c: &mut Criterion) {
@@ -16,7 +16,7 @@ fn bench_dedup(c: &mut Criterion) {
         b.iter_batched(
             || data.clone(),
             |v| {
-                let _ = algo::my_fast_dedup(&v);
+                let _ = algo::dedup(&v);
             },
             BatchSize::SmallInput,
         )

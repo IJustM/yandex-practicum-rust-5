@@ -19,20 +19,12 @@ fn main() {
             let _ = sum_even(&data);
         });
 
-        time_it("slow_fib", || {
-            let _ = algo::slow_fib(fib_n);
+        time_it("fib", || {
+            let _ = algo::fib(fib_n);
         });
 
-        time_it("my_fast_fib", || {
-            let _ = algo::my_fast_fib(fib_n);
-        });
-
-        time_it("slow_dedup", || {
-            let _ = algo::slow_dedup(&dedup_data);
-        });
-
-        time_it("my_fast_dedup", || {
-            let _ = algo::my_fast_dedup(&dedup_data);
+        time_it("dedup", || {
+            let _ = algo::dedup(&dedup_data);
         });
     }
 }

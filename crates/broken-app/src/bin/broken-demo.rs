@@ -11,10 +11,10 @@ fn main() {
         let text = " Hello World ";
         println!("normalize: {}", normalize(text));
 
-        let fib = algo::my_fast_fib(20);
+        let fib = algo::fib(20);
         println!("fib(20): {}", fib);
 
-        let uniq = algo::slow_dedup(&[1, 2, 2, 3, 1, 4, 4]);
+        let uniq = algo::dedup(&[1, 2, 2, 3, 1, 4, 4]);
         println!("dedup: {:?}", uniq);
 
         let after_free = unsafe { use_after_free() };

@@ -10,6 +10,10 @@
 
 Локальный запуск `pre-commit run --verbose --all-files`
 
+## Reference App
+
+Находится в `crates/reference-app`
+
 ## Broken App
 
 ```bash
